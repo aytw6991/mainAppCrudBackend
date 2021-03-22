@@ -29,7 +29,7 @@ public class Attendance implements Serializable {
     private LocalDate loggedDate;
     @Column(name="Employee_Name", nullable=false)
     private String LoggedBy;
-    @Column(name="Status")
+    @Column(name="Status", nullable=false)
     private String status;
 
     public int getId() {
