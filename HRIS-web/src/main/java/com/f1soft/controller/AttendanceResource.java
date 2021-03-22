@@ -18,17 +18,16 @@ public class AttendanceResource {
     }
     
     @GET
-    @Path("/early")
-    public List<Attendance> getEarly(){
-        return attendanceService.getEarly();
+    @Path("/late")
+    public List<Attendance> getLateCheckIn(){
+        return attendanceService.getLateCheckIn();
     }
     
     @GET
-    @Path("/late")
-    public List<Attendance> getLate(){
-        return attendanceService.getLate();
+    @Path("/early")
+    public List<Attendance> getEarlyCheckOut(){
+        return attendanceService.getEarlyCheckOut();
     }
-    
     
     @POST
     public Attendance logIn(Attendance attendance){
