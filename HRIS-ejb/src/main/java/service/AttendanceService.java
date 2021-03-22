@@ -28,34 +28,39 @@ public class AttendanceService {
         attendanceNew.setLoggedDate(date);
         attendanceNew.setLoggedTime(time);
         attendanceNew.setLoggedBy(attendance.getLoggedBy());
+        attendanceNew.setStatus(attendance.getStatus());
         return attendanceDaoImpl.logIn(attendanceNew);
     }
     
-    public List<Attendance> getEarly(){
-        LocalTime lt = LocalTime.parse("11:00:00");
+    public List<Attendance> getEarlyCheckOut(){
+        LocalTime lt = LocalTime.parse("18:00:00");
         List<Attendance> attendanceList = getAll();
-        List<Attendance> earlyAttendanceList = new ArrayList<>();
+        List<Attendance> earlyCheckOutList = new ArrayList<>();
         
         for(int i = 0; i < attendanceList.size(); i++){
-            int val = lt.compareTo(attendanceList.get(i).getLoggedTime());
-            if (val > 0){
-                earlyAttendanceList.add(attendanceList.get(i));
-            }   
-        }        
-        return earlyAttendanceList;
+            if(attendanceList.get(i).getStatus().equals("Check Out")){
+                int val = lt.compareTo(attendanceList.get(i).getLoggedTime());
+                if (val > 0){
+                    earlyCheckOutList.add(attendanceList.get(i));
+                }
+            }
+        }
+        return earlyCheckOutList;
     }
     
-    public List<Attendance> getLate(){
-        LocalTime lt = LocalTime.parse("11:00:00");
+    public List<Attendance> getLateCheckIn(){
+        LocalTime lt = LocalTime.parse("09:00:00");
         List<Attendance> attendanceList = getAll();
-        List<Attendance> lateAttendanceList = new ArrayList<>();
+        List<Attendance> lateCheckInList = new ArrayList<>();
         
         for(int i = 0; i < attendanceList.size(); i++){
-            int val = lt.compareTo(attendanceList.get(i).getLoggedTime());            
-            if (val < 0){
-                lateAttendanceList.add(attendanceList.get(i));
+            if(attendanceList.get(i).getStatus().equals("Check In")){
+                int val = lt.compareTo(attendanceList.get(i).getLoggedTime());            
+                if (val < 0){
+                    lateCheckInList.add(attendanceList.get(i));
+                }
             }
         }        
-       return lateAttendanceList;
+       return lateCheckInList;
     }
 }
