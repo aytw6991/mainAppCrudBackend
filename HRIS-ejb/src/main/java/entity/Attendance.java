@@ -28,7 +28,9 @@ public class Attendance implements Serializable {
     @Column(name="Logged_Date", nullable=false)
     private LocalDate loggedDate;
     @Column(name="Employee_Name", nullable=false)
-    private String loggedBy;
+    private String LoggedBy;
+    @Column(name="Status")
+    private String status;
 
     public int getId() {
         return id;
@@ -55,11 +57,18 @@ public class Attendance implements Serializable {
     }
 
     public String getLoggedBy() {
-        return loggedBy;
+        return LoggedBy;
     }
 
-    public void setLoggedBy(String loggedBy) {
-        this.loggedBy = loggedBy;
+    public void setLoggedBy(String LoggedBy) {
+        this.LoggedBy = LoggedBy;
     }
-    
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
