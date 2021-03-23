@@ -21,7 +21,7 @@ public class AttendanceDaoImpl implements AttendanceDao{
     }
 
     @Override
-    public Attendance logIn(Attendance attendance) {
+    public Attendance checkInOut(Attendance attendance) {
         em.persist(attendance);
         return attendance;
     }
