@@ -7,5 +7,5 @@ import javax.ejb.Local;
 @Local
 public interface AttendanceDao {
     public List<Attendance> getAll();
-    public Attendance logIn(Attendance attendance);
+    public Attendance checkInOut(Attendance attendance);
 }
