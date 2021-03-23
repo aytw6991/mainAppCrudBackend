@@ -3,11 +3,14 @@ package entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -20,18 +23,19 @@ public class Attendance implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Column(name="Attendance_Id")
+    @Column(name="Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name="Logged_Time", nullable=false)
     private LocalTime loggedTime;
     @Column(name="Logged_Date", nullable=false)
     private LocalDate loggedDate;
-    @Column(name="Employee_Name", nullable=false)
-    private String LoggedBy;
-    @Column(name="Status", nullable=false)
+    @Column(name="Check_Status", nullable=false)
     private String status;
-
+    @ManyToOne
+    @JoinColumn(name = "Employee_Id")
+    private Employee employee;
+    
     public int getId() {
         return id;
     }
@@ -56,14 +60,14 @@ public class Attendance implements Serializable {
         this.loggedDate = loggedDate;
     }
 
-    public String getLoggedBy() {
-        return LoggedBy;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setLoggedBy(String LoggedBy) {
-        this.LoggedBy = LoggedBy;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
-
+    
     public String getStatus() {
         return status;
     }
