@@ -1,7 +1,9 @@
 package service;
 
 import DaoImpl.AttendanceDaoImpl;
+import dto.AttendanceRequest;
 import entity.Attendance;
+import entity.Employee;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -19,17 +21,16 @@ public class AttendanceService {
         return attendanceDaoImpl.getAll();
     }
     
-    public Attendance logIn(Attendance attendance){
-        Attendance attendanceNew = new Attendance();
-        
+    public Attendance checkInOut(AttendanceRequest attendanceRequest){
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
         
-        attendanceNew.setLoggedDate(date);
-        attendanceNew.setLoggedTime(time);
-        attendanceNew.setLoggedBy(attendance.getLoggedBy());
-        attendanceNew.setStatus(attendance.getStatus());
-        return attendanceDaoImpl.logIn(attendanceNew);
+        Attendance attendance = new Attendance();
+        attendance.setLoggedDate(date);
+        attendance.setLoggedTime(time);
+        attendance.setStatus(attendanceRequest.getStatus());
+        attendance.setEmployee(attendanceRequest.getEmployee());
+        return attendanceDaoImpl.checkInOut(attendance);
     }
     
     public List<Attendance> getEarlyCheckOut(){
