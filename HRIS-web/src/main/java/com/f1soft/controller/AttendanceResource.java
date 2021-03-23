@@ -1,5 +1,6 @@
 package com.f1soft.controller;
 
+import dto.AttendanceRequest;
 import entity.Attendance;
 import java.util.List;
 import javax.inject.Inject;
@@ -30,8 +31,8 @@ public class AttendanceResource {
     }
     
     @POST
-    public Attendance logIn(Attendance attendance){
-        return attendanceService.logIn(attendance);
+    public Attendance checkInOut(AttendanceRequest attendanceRequest){
+        return attendanceService.checkInOut(attendanceRequest);
     }
     
 }
